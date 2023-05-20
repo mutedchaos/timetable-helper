@@ -11,8 +11,8 @@ const panelStyles = 'm-2'
 function App() {
   const [departure1, setDeparture1] = useState<string | null>('080000')
   const [departure2, setDeparture2] = useState<string | null>('081500')
-  const [additionalInitialDeparture, setAdditionalInitialDeparture] = useState<string | null>('080500')
-  const [additionalExampleDeparture, setAdditionalExampleDeparture] = useState<string | null>(null)
+  const [additionalInitialDeparture, setAdditionalInitialDeparture] = useState<string | null>(null)
+  const [additionalExampleDeparture, setAdditionalExampleDeparture] = useState<string | null>('050500')
   const [numberOfAdditionalTrains, setNumberOfAdditionalTrains] = useState<number>(1)
 
   return (
@@ -37,10 +37,10 @@ function App() {
         </div>
         <div className={panelStyles}>
           <h2>Additional train adjuster</h2>
-          <p>Initial departure</p>
-          <TimeInput onChange={setAdditionalInitialDeparture} value={additionalInitialDeparture} />
           <p>Example departure for full run</p>
-          <TimeInput onChange={setAdditionalExampleDeparture} value={additionalExampleDeparture} allowEmpty />
+          <TimeInput onChange={setAdditionalExampleDeparture} value={additionalExampleDeparture} />
+          <p>Initial departure, if not the same</p>
+          <TimeInput onChange={setAdditionalInitialDeparture} value={additionalInitialDeparture} allowEmpty />
         </div>
       </div>
       <MomentContextProvider>
@@ -73,7 +73,7 @@ function App() {
 
             <div className={panelStyles}>
               <h2>Adjusted initial departure offset</h2>
-              {departure1 && departure2 && additionalInitialDeparture ? (
+              {departure1 && departure2 && additionalExampleDeparture ? (
                 <AdjustedDepartureOffsets
                   departure1={departure1}
                   departure2={departure2}
